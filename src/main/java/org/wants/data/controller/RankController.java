@@ -31,25 +31,20 @@ public class RankController {
 	@Autowired
 	RankService rankService;
 
-	@RequestMapping(value = "hot/{page}/{size}/{batch}/{type}", method = RequestMethod.GET)
+	@RequestMapping(value = "hot/{totalPage}/{size}/{batch}/{type}", method = RequestMethod.GET)
 	public @ResponseBody
-	Callable<AjaxResponse> hot_list(@PathVariable("page") final Integer page, @PathVariable("size") final Integer size,
+	Callable<AjaxResponse> hot_list(@PathVariable("totalPage") final Integer totalPage, @PathVariable("size") final Integer size,
 			@PathVariable("batch") final String batch, @PathVariable("type") final String type,
 			@RequestParam(required = false) final String callback, @RequestParam(required = false) final String ftl) {
 		return new Callable<AjaxResponse>() {
 			@Override
 			public AjaxResponse call() throws Exception {
 				AjaxResponse resp = new AjaxResponse(AjaxResponseStatus.OK.getCode(), AjaxResponseCode.SUCCESS.getCode());
-				String[] hotCategories = { "166849011", "1272297011", "166842011" };
+				String hotCategory = "baby-products";
 				LinkedList<List<ItemInfo>> lists = new LinkedList<List<ItemInfo>>();
-				for (int i = 0; i < hotCategories.length; i++) {
-					String category = hotCategories[i];
-					Map<String, Object> cond = new HashMap<String, Object>();
-					cond.put("batch", batch);
-					cond.put("category", category);
-					cond.put("type", type);
+				for (int page = 0; page < totalPage; page++) {
 					PageRequest pageRequest = new PageRequest(page, size);
-					Page<ItemInfo> pages = rankService.findItemByBatchAndCategoryAndType(batch, category, type, pageRequest);
+					Page<ItemInfo> pages = rankService.findItemByBatchAndCategoryAndType(batch, hotCategory, type, pageRequest);
 					List<ItemInfo> list = pages.getContent();
 					lists.add(list);
 				}
