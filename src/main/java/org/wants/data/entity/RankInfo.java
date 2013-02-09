@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @SuppressWarnings("serial")
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Document(collection = "ama_top")
+@Document(collection = "ama_rank_item")
 public class RankInfo implements Serializable {
 	@Id
 	private String id;
