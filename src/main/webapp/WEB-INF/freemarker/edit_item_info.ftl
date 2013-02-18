@@ -1,5 +1,5 @@
 <form id="item_info_form_${datas.asin}" class="form" action="">
-	<legend>商品信息<img id="loading_img" style="display:none;" src="/item/resources/img/loading.gif"></legend>
+	<legend>商品信息<img id="loading_img" style="display:none;" src="/editor/resources/img/loading.gif"></legend>
 	<input type="hidden" name="version" id="version" value="${datas.version?if_exists}"/>
 	<div class="row">
 		<div class="span6">
@@ -38,7 +38,7 @@
 				<label class="control-label" for="cover_img"><b>封面</b><button class="btn btn-success btn-mini">更新</button></label>
 				<div class="controls">
 					<input type="hidden"  name="cover_img" value="${datas.cover_img}">
-					<img style="width:67px;height:67px;" src="${datas.cover_img}">
+					<img style="width:67px;height:67px;" src="http://img.ubabytime.com${datas.cover_img}">
 				</div>
 				</div>
 				<div class="control-group">
@@ -46,7 +46,7 @@
 					<div class="controls">
 						<#list datas.thumbs?if_exists as img>
 						<input type="hidden"  name="_thumbs" value="${img}">
-						<img src="${img}">
+						<img src="http://img.ubabytime.com${img}">
 						</#list>
 					</div>
 				</div>
