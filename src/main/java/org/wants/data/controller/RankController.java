@@ -31,9 +31,30 @@ public class RankController {
 	@Autowired
 	RankService rankService;
 
-	@RequestMapping(value = "hot/{totalPage}/{size}/{batch}/{type}", method = RequestMethod.GET)
+	@RequestMapping(value = "hot/{page}/{size}/{batch}/{type}", method = RequestMethod.GET)
 	public @ResponseBody
-	Callable<AjaxResponse> hot_list(@PathVariable("totalPage") final Integer totalPage, @PathVariable("size") final Integer size,
+	Callable<AjaxResponse> hot_list(@PathVariable("page") final Integer page, @PathVariable("size") final Integer size,
+			@PathVariable("batch") final String batch, @PathVariable("type") final String type,
+			@RequestParam(required = false) final String callback, @RequestParam(required = false) final String ftl) {
+		return new Callable<AjaxResponse>() {
+			@Override
+			public AjaxResponse call() throws Exception {
+				AjaxResponse resp = new AjaxResponse(AjaxResponseStatus.OK.getCode(), AjaxResponseCode.SUCCESS.getCode());
+				String hotCategory = "baby-products";
+				PageRequest pageRequest = new PageRequest(page, size);
+				Page<ItemInfo> pages = rankService.findItemByBatchAndCategoryAndType(batch, hotCategory, type, pageRequest);
+				List<ItemInfo> list = pages.getContent();
+				resp.setAddition(list);
+				resp.setCallback(callback);
+				resp.setFtl(ftl);
+				return resp;
+			}
+		};
+	}
+
+	@RequestMapping(value = "slider/{totalPage}/{size}/{batch}/{type}", method = RequestMethod.GET)
+	public @ResponseBody
+	Callable<AjaxResponse> slider_list(@PathVariable("totalPage") final Integer totalPage, @PathVariable("size") final Integer size,
 			@PathVariable("batch") final String batch, @PathVariable("type") final String type,
 			@RequestParam(required = false) final String callback, @RequestParam(required = false) final String ftl) {
 		return new Callable<AjaxResponse>() {
