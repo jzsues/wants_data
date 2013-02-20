@@ -4,7 +4,7 @@
 				href="http://www.jzzmg.com/item?id=${item.asin}" target="_blank" alt="${item.name}">
 					<div class="thumbnail">
 						<img alt="${item.name}" style="width: 180px; height: 180px;" src="http://img.ubabytime.com${item.cover_img}!x180">
-						<div style="font-size:12px;margin-top: 3px; text-align: center; line-height: 18px;">
+						<div style="font-size:12px;margin-top: 3px; text-align: center; line-height: 18px;height:36px">
 							<b>${item.name}</b>
 						</div>
 					</div>
