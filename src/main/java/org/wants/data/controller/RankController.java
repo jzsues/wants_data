@@ -9,6 +9,9 @@ import java.util.concurrent.Callable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.wants.data.entity.AjaxResponse;
 import org.wants.data.entity.ItemInfo;
+import org.wants.data.entity.PublishInfo;
 import org.wants.data.meta.AjaxResponseCode;
 import org.wants.data.meta.AjaxResponseStatus;
 import org.wants.data.meta.ItemRankType;
+import org.wants.data.repository.PublishRepository;
 import org.wants.data.service.RankService;
 
 /**
@@ -31,18 +36,23 @@ public class RankController {
 	@Autowired
 	RankService rankService;
 
-	@RequestMapping(value = "hot/{page}/{size}/{batch}/{type}", method = RequestMethod.GET)
+	@Autowired
+	PublishRepository publishRepository;
+
+	@RequestMapping(value = "hot/{category}/{page}/{size}/{batch}/{type}", method = RequestMethod.GET)
 	public @ResponseBody
-	Callable<AjaxResponse> hot_list(@PathVariable("page") final Integer page, @PathVariable("size") final Integer size,
-			@PathVariable("batch") final String batch, @PathVariable("type") final String type,
+	Callable<AjaxResponse> hot_list(@PathVariable("category") final String category, @PathVariable("page") final Integer page,
+			@PathVariable("size") final Integer size, @PathVariable("batch") final String batch, @PathVariable("type") final String type,
 			@RequestParam(required = false) final String callback, @RequestParam(required = false) final String ftl) {
 		return new Callable<AjaxResponse>() {
 			@Override
 			public AjaxResponse call() throws Exception {
 				AjaxResponse resp = new AjaxResponse(AjaxResponseStatus.OK.getCode(), AjaxResponseCode.SUCCESS.getCode());
-				String hotCategory = "baby-products";
+				String hotCategory = ("-1".equals(category)) ? "baby-products" : category;
+				Sort sort = new Sort(new Order(Direction.DESC, "batch"));
+				String _batch = findLastBatch(hotCategory, batch, type, sort);
 				PageRequest pageRequest = new PageRequest(page, size);
-				Page<ItemInfo> pages = rankService.findItemByBatchAndCategoryAndType(batch, hotCategory, type, pageRequest);
+				Page<ItemInfo> pages = rankService.findItemByBatchAndCategoryAndType(_batch, hotCategory, type, pageRequest);
 				List<ItemInfo> list = pages.getContent();
 				resp.setAddition(list);
 				resp.setCallback(callback);
@@ -52,20 +62,44 @@ public class RankController {
 		};
 	}
 
-	@RequestMapping(value = "slider/{totalPage}/{size}/{batch}/{type}", method = RequestMethod.GET)
+	/**
+	 * @param category
+	 * @param batch
+	 * @param type
+	 * @param sort
+	 * @return
+	 */
+	private String findLastBatch(final String category, final String batch, final String type, Sort sort) {
+		String _batch = "";
+		if ("-1".equals(batch)) {
+			PublishInfo lastPublishBatch = publishRepository.findByCategoryAndType(category, type, sort);
+			if (lastPublishBatch == null) {
+				_batch = batch;
+			} else {
+				_batch = lastPublishBatch.getBatch();
+			}
+		} else {
+			_batch = batch;
+		}
+		return _batch;
+	}
+
+	@RequestMapping(value = "slider/{category}/{totalPage}/{size}/{batch}/{type}", method = RequestMethod.GET)
 	public @ResponseBody
-	Callable<AjaxResponse> slider_list(@PathVariable("totalPage") final Integer totalPage, @PathVariable("size") final Integer size,
-			@PathVariable("batch") final String batch, @PathVariable("type") final String type,
+	Callable<AjaxResponse> slider_list(@PathVariable("category") final String category, @PathVariable("totalPage") final Integer totalPage,
+			@PathVariable("size") final Integer size, @PathVariable("batch") final String batch, @PathVariable("type") final String type,
 			@RequestParam(required = false) final String callback, @RequestParam(required = false) final String ftl) {
 		return new Callable<AjaxResponse>() {
 			@Override
 			public AjaxResponse call() throws Exception {
 				AjaxResponse resp = new AjaxResponse(AjaxResponseStatus.OK.getCode(), AjaxResponseCode.SUCCESS.getCode());
-				String hotCategory = "baby-products";
+				String hotCategory = ("-1".equals(category)) ? "baby-products" : category;
+				Sort sort = new Sort(new Order(Direction.DESC, "batch"));
+				String _batch = findLastBatch(hotCategory, batch, type, sort);
 				LinkedList<List<ItemInfo>> lists = new LinkedList<List<ItemInfo>>();
 				for (int page = 0; page < totalPage; page++) {
 					PageRequest pageRequest = new PageRequest(page, size);
-					Page<ItemInfo> pages = rankService.findItemByBatchAndCategoryAndType(batch, hotCategory, type, pageRequest);
+					Page<ItemInfo> pages = rankService.findItemByBatchAndCategoryAndType(_batch, hotCategory, type, pageRequest);
 					List<ItemInfo> list = pages.getContent();
 					lists.add(list);
 				}
