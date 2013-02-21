@@ -41,6 +41,86 @@ public class ItemInfo implements Serializable {
 
 	private String status;
 
+	private String r_desc;
+
+	private String r_dimensions;
+
+	private String r_dimensions_unit;
+
+	private String r_weight;
+
+	private String r_weight_unit;
+
+	private String r_shipping;
+
+	private String r_origin;
+
+	private String r_review;
+
+	public String getR_desc() {
+		return r_desc;
+	}
+
+	public void setR_desc(String r_desc) {
+		this.r_desc = r_desc;
+	}
+
+	public String getR_dimensions() {
+		return r_dimensions;
+	}
+
+	public void setR_dimensions(String r_dimensions) {
+		this.r_dimensions = r_dimensions;
+	}
+
+	public String getR_dimensions_unit() {
+		return r_dimensions_unit;
+	}
+
+	public void setR_dimensions_unit(String r_dimensions_unit) {
+		this.r_dimensions_unit = r_dimensions_unit;
+	}
+
+	public String getR_weight() {
+		return r_weight;
+	}
+
+	public void setR_weight(String r_weight) {
+		this.r_weight = r_weight;
+	}
+
+	public String getR_weight_unit() {
+		return r_weight_unit;
+	}
+
+	public void setR_weight_unit(String r_weight_unit) {
+		this.r_weight_unit = r_weight_unit;
+	}
+
+	public String getR_shipping() {
+		return r_shipping;
+	}
+
+	public void setR_shipping(String r_shipping) {
+		this.r_shipping = r_shipping;
+	}
+
+	public String getR_origin() {
+		return r_origin;
+	}
+
+	public void setR_origin(String r_origin) {
+		this.r_origin = r_origin;
+	}
+
+	public String getR_review() {
+		return r_review;
+	}
+
+	public void setR_review(String r_review) {
+		this.r_review = r_review;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -121,14 +201,6 @@ public class ItemInfo implements Serializable {
 		this.prd_desc = prd_desc;
 	}
 
-	public String[] getThumbs() {
-		return thumbs;
-	}
-
-	public void setThumbs(String[] thumbs) {
-		this.thumbs = thumbs;
-	}
-
 	public Map<String, String> getPrd_details() {
 		return prd_details;
 	}
@@ -151,6 +223,14 @@ public class ItemInfo implements Serializable {
 
 	public void setPrd_spec(Map<String, String> prd_spec) {
 		this.prd_spec = prd_spec;
+	}
+
+	public String[] getThumbs() {
+		return thumbs;
+	}
+
+	public void setThumbs(String[] thumbs) {
+		this.thumbs = thumbs;
 	}
 
 }
