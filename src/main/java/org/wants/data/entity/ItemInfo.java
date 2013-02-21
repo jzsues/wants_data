@@ -1,6 +1,8 @@
 package org.wants.data.entity;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
@@ -27,11 +29,11 @@ public class ItemInfo implements Serializable {
 
 	private String prd_desc;
 
-	private String prd_details;
+	private Map<String, String> prd_details;
 
-	private String prd_features;
+	private List<String> prd_features;
 
-	private String prd_spec;
+	private Map<String, String> prd_spec;
 
 	private String[] thumbs;
 
@@ -61,14 +63,6 @@ public class ItemInfo implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getPrd_spec() {
-		return prd_spec;
-	}
-
-	public void setPrd_spec(String prd_spec) {
-		this.prd_spec = prd_spec;
 	}
 
 	public String getAsin() {
@@ -127,28 +121,36 @@ public class ItemInfo implements Serializable {
 		this.prd_desc = prd_desc;
 	}
 
-	public String getPrd_details() {
-		return prd_details;
-	}
-
-	public void setPrd_details(String prd_details) {
-		this.prd_details = prd_details;
-	}
-
-	public String getPrd_features() {
-		return prd_features;
-	}
-
-	public void setPrd_features(String prd_features) {
-		this.prd_features = prd_features;
-	}
-
 	public String[] getThumbs() {
 		return thumbs;
 	}
 
 	public void setThumbs(String[] thumbs) {
 		this.thumbs = thumbs;
+	}
+
+	public Map<String, String> getPrd_details() {
+		return prd_details;
+	}
+
+	public void setPrd_details(Map<String, String> prd_details) {
+		this.prd_details = prd_details;
+	}
+
+	public List<String> getPrd_features() {
+		return prd_features;
+	}
+
+	public void setPrd_features(List<String> prd_features) {
+		this.prd_features = prd_features;
+	}
+
+	public Map<String, String> getPrd_spec() {
+		return prd_spec;
+	}
+
+	public void setPrd_spec(Map<String, String> prd_spec) {
+		this.prd_spec = prd_spec;
 	}
 
 }
