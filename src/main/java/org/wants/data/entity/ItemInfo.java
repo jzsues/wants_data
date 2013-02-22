@@ -59,6 +59,10 @@ public class ItemInfo implements Serializable {
 
 	private String r_weight_unit;
 
+	private String r_shipping_weight;
+
+	private String r_shipping_weight_unit;
+
 	private String r_shipping;
 
 	private String r_origin;
@@ -72,6 +76,22 @@ public class ItemInfo implements Serializable {
 	private String r_price_unit;
 
 	private String r_num_of_pack;
+
+	public String getR_shipping_weight() {
+		return r_shipping_weight;
+	}
+
+	public void setR_shipping_weight(String r_shipping_weight) {
+		this.r_shipping_weight = r_shipping_weight;
+	}
+
+	public String getR_shipping_weight_unit() {
+		return r_shipping_weight_unit;
+	}
+
+	public void setR_shipping_weight_unit(String r_shipping_weight_unit) {
+		this.r_shipping_weight_unit = r_shipping_weight_unit;
+	}
 
 	public String getPrice_taobao() {
 		return price_taobao;
