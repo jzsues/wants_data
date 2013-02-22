@@ -23,6 +23,12 @@ public class ItemInfo implements Serializable {
 
 	private String price;
 
+	private String price_taobao;
+
+	private String price_tiancao;
+
+	private String price_unit;
+
 	private String you_save;
 
 	private String name;
@@ -41,6 +47,8 @@ public class ItemInfo implements Serializable {
 
 	private String status;
 
+	private String r_name;
+
 	private String r_desc;
 
 	private String r_dimensions;
@@ -56,6 +64,78 @@ public class ItemInfo implements Serializable {
 	private String r_origin;
 
 	private String r_review;
+
+	private String r_source_domain;
+
+	private String r_item_url;
+
+	private String r_price_unit;
+
+	private String r_num_of_pack;
+
+	public String getPrice_taobao() {
+		return price_taobao;
+	}
+
+	public void setPrice_taobao(String price_taobao) {
+		this.price_taobao = price_taobao;
+	}
+
+	public String getPrice_tiancao() {
+		return price_tiancao;
+	}
+
+	public void setPrice_tiancao(String price_tiancao) {
+		this.price_tiancao = price_tiancao;
+	}
+
+	public String getR_source_domain() {
+		return r_source_domain;
+	}
+
+	public void setR_source_domain(String r_source_domain) {
+		this.r_source_domain = r_source_domain;
+	}
+
+	public String getR_item_url() {
+		return r_item_url;
+	}
+
+	public void setR_item_url(String r_item_url) {
+		this.r_item_url = r_item_url;
+	}
+
+	public String getR_price_unit() {
+		return r_price_unit;
+	}
+
+	public void setR_price_unit(String r_price_unit) {
+		this.r_price_unit = r_price_unit;
+	}
+
+	public String getR_num_of_pack() {
+		return r_num_of_pack;
+	}
+
+	public void setR_num_of_pack(String r_num_of_pack) {
+		this.r_num_of_pack = r_num_of_pack;
+	}
+
+	public String getPrice_unit() {
+		return price_unit;
+	}
+
+	public void setPrice_unit(String price_unit) {
+		this.price_unit = price_unit;
+	}
+
+	public String getR_name() {
+		return r_name;
+	}
+
+	public void setR_name(String r_name) {
+		this.r_name = r_name;
+	}
 
 	public String getR_desc() {
 		return r_desc;

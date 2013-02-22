@@ -32,6 +32,16 @@ public class CategoryInfo implements Serializable {
 
 	private String parent;
 
+	private String r_name;
+
+	public String getR_name() {
+		return r_name;
+	}
+
+	public void setR_name(String r_name) {
+		this.r_name = r_name;
+	}
+
 	public String getId() {
 		return id;
 	}
