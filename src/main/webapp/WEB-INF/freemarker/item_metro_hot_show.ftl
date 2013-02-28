@@ -7,6 +7,11 @@
 						<div style="font-size:12px;margin-top: 3px; text-align: center; line-height: 18px;height:36px">
 							<b>${item.r_name!}</b>
 						</div>
+						<div class="price_value">
+					      <div class="price_tag">
+					        <h6>$26</h6>
+					      </div>
+					    </div>
 					</div>
 			</a></li>
 	</#list>

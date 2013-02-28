@@ -96,14 +96,10 @@ public class RankController {
 				String hotCategory = ("-1".equals(category)) ? "baby-products" : category;
 				Sort sort = new Sort(new Order(Direction.DESC, "batch"));
 				String _batch = findLastBatch(hotCategory, batch, type, sort);
-				LinkedList<List<ItemInfo>> lists = new LinkedList<List<ItemInfo>>();
-				for (int page = 0; page < totalPage; page++) {
-					PageRequest pageRequest = new PageRequest(page, size);
-					Page<ItemInfo> pages = rankService.findItemByBatchAndCategoryAndType(_batch, hotCategory, type, pageRequest);
-					List<ItemInfo> list = pages.getContent();
-					lists.add(list);
-				}
-				resp.setAddition(lists);
+				PageRequest pageRequest = new PageRequest(0, totalPage * size);
+				Page<ItemInfo> pages = rankService.findItemByBatchAndCategoryAndType(_batch, hotCategory, type, pageRequest);
+				List<ItemInfo> list = pages.getContent();
+				resp.setAddition(list);
 				resp.setCallback(callback);
 				resp.setFtl(ftl);
 				return resp;
